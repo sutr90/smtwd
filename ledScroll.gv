@@ -1,0 +1,19 @@
+digraph G {
+loopHead[label="loopHead\nreset str pointer"];
+loopBody[label="loopBody\nshiftLeft(f,t)"];
+printStr[label="printStr\nmove str pointer"];
+printChar[label="printChar\nwriteSprite"];
+scrollBuffer[label="scrollBuffer\nshiftLeft(f,f)"];
+
+
+
+  loopHead->loopBody[label=t100];
+  loopBody->printStr[label=empty];
+
+  printStr->loopHead[label=noChar];
+
+  printStr->printChar[label=hasChar];
+  printChar->scrollBuffer[label=empty];
+scrollBuffer->scrollBuffer[label=t100];
+scrollBuffer->printStr[label=bufferEmpty];
+}
