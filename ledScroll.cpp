@@ -2,7 +2,7 @@
 
 #include "ledScroll.h"
 
-const ledScroll::State ledScroll::fsmTable[5][5] = {
+const byte ledScroll::fsmTable[5][5] = {
 	/* evt_bufferEmpty,        evt_empty,      evt_hasChar,       evt_noChar,         evt_t100, */
 	{      st_loopBody,      st_printStr,      st_loopBody,      st_loopBody,      st_loopBody, },/* loopBody */
 	{      st_loopHead,      st_loopHead,      st_loopHead,      st_loopHead,      st_loopBody, },/* loopHead */
