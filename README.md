@@ -1,0 +1,1 @@
+Simple library for displaying scrolling text on MAX7219 driven LED Matrix. There are no delays.
