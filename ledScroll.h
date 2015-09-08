@@ -105,6 +105,7 @@ const PROGMEM byte CH[] = {
 class ledScroll{
 public:
 	ledScroll();
+  ledScroll(MaxMatrix &m);
 	void loop();
 private:
 	typedef enum {evt_bufferEmpty, evt_empty, evt_hasChar, evt_noChar, evt_t100, evt_none} Event;
@@ -123,13 +124,16 @@ private:
 	void action_printChar();
 	void action_loopBody();
 	void evalState();
+
+
+  void init();
 	
 	/*----------*/
 	const byte data = 12;    // DIN pin of MAX7219 module
 	const byte load = 11;    // CS pin of MAX7219 module
 	const byte clock = 10;  // CLK pin of MAX7219 module
 	const byte maxInUse = 1;  //how many MAX7219 are connected
-	MaxMatrix m; // define Library
+	MaxMatrix _m; // define Library
 	byte buffer[10];
 	static char string1[23];
 	char *c;

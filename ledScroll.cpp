@@ -31,7 +31,7 @@ void ledScroll::action_scrollBuffer(){
 	currentEvent = evt_t100;
 	interval = 75;
 	if(bufferIndex < buffer[0]+1){
-		m.shiftLeft(false, false);
+		_m.shiftLeft(false, false);
 		bufferIndex++;
 	} else {
 		currentEvent = evt_bufferEmpty;
@@ -50,15 +50,15 @@ void ledScroll::action_printStr(){
 void ledScroll::action_printChar(){
 	/* TODO: add action for state printChar */
 	memcpy_P(buffer, CH + 7*((*c)-32), 7);
-	m.writeSprite(maxInUse*8, 0, buffer);
-	m.setColumn(maxInUse*8 + buffer[0], 0);
+	_m.writeSprite(maxInUse*8, 0, buffer);
+	_m.setColumn(maxInUse*8 + buffer[0], 0);
 	currentEvent = evt_empty;
 	bufferIndex = 0;
 }
 
 void ledScroll::action_loopBody(){
 	/* TODO: add action for state loopBody */
-	m.shiftLeft(false, true);
+	_m.shiftLeft(false, true);
 	currentEvent = evt_empty;
 }
 
@@ -82,15 +82,22 @@ void ledScroll::evalState(){
 	}
 }
 
-ledScroll::ledScroll() : m(data, load, clock, maxInUse){
-	interval = 0;
-	previousMillis = 0;
-	currentState = st_loopHead;
-	currentEvent = evt_none;
-	/*-----*/
-	m.init(); // module MAX7219
-	m.setIntensity(5); // LED Intensity 0-15
+void ledScroll::init(){
+  interval = 0;
+  previousMillis = 0;
+  currentState = st_loopHead;
+  currentEvent = evt_none;
   action_loopHead();
+}
+
+ledScroll::ledScroll() : _m(data, load, clock, maxInUse){
+	init();
+	_m.init(); // module MAX7219
+	_m.setIntensity(5); // LED Intensity 0-15
+}
+
+ledScroll::ledScroll(MaxMatrix &m) : _m(m){
+  init();
 }
 
 void ledScroll::loop() {
