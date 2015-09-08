@@ -1,5 +1,7 @@
-#include <MaxMatrix.h>
+#ifndef LED_SCROLL
+#define LED_SCROLL
 
+#include <MaxMatrix.h>
 #include <avr/pgmspace.h>
 
 const PROGMEM byte CH[] = {
@@ -134,3 +136,5 @@ private:
 	byte bufferIndex;
 
 };
+
+#endif
